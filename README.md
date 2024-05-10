@@ -32,10 +32,10 @@ En esta fase, usaremos la API de MoviesDataset, que contiene una gran cantidad d
 - La documentación a la API la encontrarás aquí.
 
 NOTA: La información de la API deberá ser almacenada en una lista de tuplas. Cada tupla corresponderá a una película. Siguiendo el siguiente ejemplo:
-
+```
 Copy
 [("Pelicula", "Titanic", 1997, 12, "abc123"), ("Pelicula", "Los Gonnies", 1985, 6, "abc456"), ...]
-
+```
 **Fase 2: Extracción de Detalles de Películas con Selenium**
 
 Una vez que tengan una lista de películas de la API, el siguiente paso es obtener información más detallada sobre ellas. Utilizaras la herramienta de automatización web Selenium para navegar a sitios web de reseñas de películas (IMDB y Rotten Tomatoes) y extraer detalles como calificaciones, actores y directores. En concreto deberás extraer información sobre:
