@@ -1,6 +1,8 @@
 # project-da-promo-H-module-2-team-Interstellar
 
-Proyecto: Proyecto CinemExtract: Explorando el Séptimo Arte a través de Datos y Tecnología
+PROYECTO CINEMEXTRACT
+Explorando el Séptimo Arte a través de Datos y Tecnología
+
 1. Resumen
 La plataforma de streaming BHO se encuentra en una búsqueda constante para mejorar la calidad de su contenido y la satisfacción de sus usuarios. Nuestro proyecto consiste en aplicar técnicas de análisis de datos para identificar cuáles son las películas y cortometrajes más populares y mejor valorados desde 2010 hasta la fecha. Esto ayudará a BHO a tomar decisiones informadas sobre qué contenido promocionar y destacar en su plataforma.
 
