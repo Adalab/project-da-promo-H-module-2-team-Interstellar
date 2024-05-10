@@ -56,10 +56,10 @@ Una vez que tengan una lista de películas de la API, el siguiente paso es obten
 
 NOTA: La información de la API deberá ser almacenada en una lista de tuplas. Cada tupla corresponderá a una película. Siguiendo el siguiente ejemplo:
 
-
+```
 Copy
 [(7.7, 77,  "Richard Donner", ["Chris ColumbusSteven", "Spielberg"], "Los Goonies son un grupo de amigos que viven en Goon Docks, Astoria, pero sus casas han sido compradas y van a ser demolidas. Sin embargo, vivirán su última aventura en busca de un tesoro que pueda salvar el barrio.", "Aventura", "1h 54min", "Los Gonnies"),  ...]
-
+```
 
 **Fase 3: Extracción de Detalles de Actores con Selenium**
 
@@ -78,11 +78,11 @@ El siguiente paso es extraer información detallada de los 10 principales actore
 
 NOTA: La información de la API deberá ser almacenada en una lista de tuplas. Cada tupla corresponderá a una película. Siguiendo el siguiente ejemplo:
 
-
+```
 Copy
 [("Adam Sadler", 1966, ["El aguador", "Little Nicky", "Un papá genial", "El chico ideal" ], ["Reparto", "Producción", "Guion"] , ["American Comedy Awards, USA", "Annie Awards"],   ),  
 ...]
-
+```
 
 **Fase 4: Extracción de Tablas de los Premios Oscar con Beautiful Soup**
 
