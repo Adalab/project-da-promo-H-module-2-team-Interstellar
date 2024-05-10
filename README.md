@@ -1,6 +1,6 @@
 # project-da-promo-H-module-2-team-Interstellar
 
-**PROYECTO CINEMEXTRACT**
+**PROYECTO CINEMEXTRACT** :clapper:
 
 **Explorando el Séptimo Arte a través de Datos y Tecnología**
 
