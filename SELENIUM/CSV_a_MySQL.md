@@ -1,4 +1,3 @@
-```markdown
 # IMPORTAR DATOS CSV A TABLAS EN MYSQL
 
 ### Paso 1: Crear la tabla en MySQL
