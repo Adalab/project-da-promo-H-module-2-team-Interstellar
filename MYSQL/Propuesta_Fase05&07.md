@@ -169,9 +169,9 @@ Con los datos almacenados en la base de datos, puedes realizar consultas SQL par
 ```sql
 SELECT g.nombre, COUNT(*) as premios
 FROM Peliculas p
-JOIN Peliculas_Generos pg ON p.id = pg.pelicula_id
-JOIN Generos g ON pg.genero_id = g.id
-JOIN Premios_Oscar po ON p.nombre = po.mejor_pelicula
+INNER JOIN Peliculas_Generos pg ON p.id = pg.pelicula_id
+INNER JOIN Generos g ON pg.genero_id = g.id
+INNER JOIN Premios_Oscar po ON p.nombre = po.mejor_pelicula
 GROUP BY g.nombre
 ORDER BY premios DESC;
 ```
@@ -181,9 +181,9 @@ ORDER BY premios DESC;
 ```sql
 SELECT g.nombre, AVG(dp.puntuacion_imdb) as promedio_imdb
 FROM Peliculas p
-JOIN Peliculas_Generos pg ON p.id = pg.pelicula_id
-JOIN Generos g ON pg.genero_id = g.id
-JOIN Detalles_Peliculas dp ON p.id = dp.pelicula_id
+INNER JOIN Peliculas_Generos pg ON p.id = pg.pelicula_id
+INNER JOIN Generos g ON pg.genero_id = g.id
+INNER JOIN Detalles_Peliculas dp ON p.id = dp.pelicula_id
 GROUP BY g.nombre
 ORDER BY promedio_imdb DESC;
 ```
@@ -213,7 +213,7 @@ ORDER BY cantidad DESC;
 ```sql
 SELECT nombre, puntuacion_imdb
 FROM Detalles_Peliculas dp
-JOIN Peliculas p ON dp.pelicula_id = p.id
+INNER JOIN Peliculas p ON dp.pelicula_id = p.id
 WHERE p.tipo = 'Serie'
 ORDER BY puntuacion_imdb DESC
 LIMIT 1;
@@ -224,7 +224,7 @@ LIMIT 1;
 ```sql
 SELECT nombre, puntuacion_imdb
 FROM Detalles_Peliculas dp
-JOIN Peliculas p ON dp.pelicula_id = p.id
+INNER JOIN Peliculas p ON dp.pelicula_id = p.id
 WHERE p.tipo = 'Pelicula'
 ORDER BY puntuacion_imdb DESC
 LIMIT 1;
