@@ -6,7 +6,8 @@ Para la Fase 5 del Proyecto CinemExtract, donde se necesita crear una base de da
 
 #### Tabla `Peliculas`
 Almacena la información básica de cada película o corto.
-- `ID_IMDB` (PK): Identificador único de la película.
+- `ID_Peliculas`: (PK): Identificador único de la película.
+- `ID_IMDB` (VARCHAR): Identificador de las película en IMDB.
 - `Tipo` (VARCHAR): Tipo (película o corto).
 - `Titulo` (VARCHAR): Nombre de la película o corto.
 - `Mes_estreno` (INT): Mes de estreno.
@@ -16,16 +17,13 @@ Almacena la información básica de cada película o corto.
 #### Tabla `Generos`
 Almacena los géneros de las películas.
 - `ID_Genero` (PK): Identificador único del género.
+- `ID_Peliculas` (FK): Identificador único de la película.
 - `Genero` (VARCHAR): Nombre del género.
 
-#### Tabla `Peliculas_Generos`
-Relación muchos a muchos entre películas y géneros.
-- `ID_IMDB (FK): Referencia a la tabla `Peliculas`.
-- `ID_Genero` (FK): Referencia a la tabla `Generos`.
 
 #### Tabla `IMDB`
 Almacena detalles adicionales de cada película.
-- `ID_IMDB` (PK, FK): Referencia a la tabla `Peliculas`.
+- `ID_Peliculas` (PK FK): Referencia a la tabla `Peliculas`.
 - `Puntuacion_IMDB` (FLOAT): Puntuación en IMDB.
 - `Director` (VARCHAR): Director de la película.
 - `Guionistas` (VARCHAR): Guionistas de la película.
@@ -35,6 +33,7 @@ Almacena detalles adicionales de cada película.
 ### Tabla `Rotten_Tomatoes"
 Almacena las puntuaciones de las películas.
 - `ID_Tomato` (PK): Identificador único del género.
+- `ID_Peliculas`(FK): Identificador único de películas.
 - `Tomatometro`: Puntuación en Rotten Tomatoes.
 
 #### Tabla `Actores`
@@ -48,7 +47,7 @@ Almacena información de los actores.
 
 #### Tabla `Peliculas_Actores`
 Relación muchos a muchos entre películas y actores.
-- `ID_IMDB` (FK): Referencia a la tabla `Peliculas`.
+- `ID_Peliculas` (FK): Referencia a la tabla `Peliculas`.
 - `ID_Actor` (FK): Referencia a la tabla `Actores`.
 
 #### Tabla `Premios_Oscar`
