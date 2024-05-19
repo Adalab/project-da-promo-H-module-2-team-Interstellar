@@ -1,4 +1,4 @@
-0,1,2,3,4,5
+"nombre", "año_nacimiento", "que_hace","conocido_por","premios","ID_IMDB"
 Al Bianchi,NULL,"['Reparto', 'Dirección de casting', 'Reparto']","['su papel en Yo, Tonya', 'The Red, Black and Blonde: God $ave', 'Velma Is Living']",NULL,tt1800301
 Thomas Brown,NULL,"['Reparto', 'Reparto']","['su papel en The Red, Black and Blonde: God $ave']",NULL,tt1800301
 Gerry Cheney,NULL,"['Reparto', 'Reparto']","['su papel en The Red, Black and Blonde: God $ave', 'Corruption']",NULL,tt1800301
