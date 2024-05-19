@@ -9,7 +9,7 @@ Almacena la información básica de cada película o corto.
 - `ID_Peliculas`: (PK): Identificador único de la película.
 - `ID_IMDB` (VARCHAR): Identificador de las película en IMDB.
 - `Tipo` (VARCHAR): Tipo (película o corto).
-- `Titulo` (VARCHAR): Nombre de la película o corto.
+- `Titulo` (VARCHAR PK): Nombre de la película o corto.
 - `Mes_estreno` (INT): Mes de estreno.
 - `Año_estreno` (INT): Mes de estreno.
 
@@ -17,13 +17,13 @@ Almacena la información básica de cada película o corto.
 #### Tabla `Generos`
 Almacena los géneros de las películas.
 - `ID_Genero` (PK): Identificador único del género.
-- `ID_Peliculas` (FK): Identificador único de la película.
+- `Titulo` (FK): Identificador único de la película.
 - `Genero` (VARCHAR): Nombre del género.
 
 
 #### Tabla `IMDB`
 Almacena detalles adicionales de cada película.
-- `ID_Peliculas` (PK FK): Referencia a la tabla `Peliculas`.
+- `ID_IMDB` (PK FK): Referencia a la tabla `Peliculas`.
 - `Puntuacion_IMDB` (FLOAT): Puntuación en IMDB.
 - `Director` (VARCHAR): Director de la película.
 - `Guionistas` (VARCHAR): Guionistas de la película.
@@ -33,6 +33,7 @@ Almacena detalles adicionales de cada película.
 ### Tabla `Rotten_Tomatoes"
 Almacena las puntuaciones de las películas.
 - `ID_Tomato` (PK): Identificador único del género.
+- `Titulo' (FK): Identificador único de la película.
 - `ID_Peliculas`(FK): Identificador único de películas.
 - `Tomatometro`: Puntuación en Rotten Tomatoes.
 
@@ -72,7 +73,7 @@ Aquí tienes la corrección de la creación de tablas y los comandos de carga de
 CREATE TABLE Peliculas (
     ID_IMDB VARCHAR(255) PRIMARY KEY,
     Tipo VARCHAR(50),
-    Titulo VARCHAR(255),
+    Titulo VARCHAR(255) PRIMARY KEY,
     Mes_estreno INT,
     Año_estreno INT
 );
@@ -113,7 +114,9 @@ CREATE TABLE IMDB (
 ```sql
 CREATE TABLE Rotten_Tomatoes (
     ID_Tomato SERIAL PRIMARY KEY,
+    Titulo VARCHAR(255)
     Tomatometro FLOAT
+    FOREIGN KEY (Titulo) REFERENCES Peliculas(Titulo)
 );
 ```
 
