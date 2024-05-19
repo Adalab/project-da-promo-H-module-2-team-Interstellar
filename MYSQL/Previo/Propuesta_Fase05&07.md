@@ -73,7 +73,7 @@ Aquí tienes la corrección de la creación de tablas y los comandos de carga de
 CREATE TABLE Peliculas (
     ID_IMDB VARCHAR(255) PRIMARY KEY,
     Tipo VARCHAR(50),
-    Titulo VARCHAR(255),
+    Titulo VARCHAR(255) PRIMARY KEY,
     Mes_estreno INT,
     Año_estreno INT
 );
