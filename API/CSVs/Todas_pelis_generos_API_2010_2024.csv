@@ -1,7 +1,4 @@
-# CSV-File created with merge-csv.com
-# -----------------------------------------------------------
-
-Tipo,Género,Título,Mes,Año,ID_IMDB
+Tipo,Genero,Titulo,Mes,Anio,ID_IMDB
 Movie,Action,Tekken,3,2010,tt0411951
 Movie,Action,Venus & Vegas,11,2010,tt0423474
 Movie,Action,The A-Team,6,2010,tt0429493
