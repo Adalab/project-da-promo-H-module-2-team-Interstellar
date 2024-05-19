@@ -3,13 +3,141 @@ USE proyecto_peliculas;
 
 -- 1. **¿Qué géneros han recibido más premios Óscar?**
 
-SELECT p.Genero, COUNT(*) AS premios
-FROM peliculas AS p
-INNER JOIN peliculas_generos pg ON p.pelicula_id = pg.pelicula_id
-INNER JOIN generos AS g ON pg.genero_id= g.genero_id
-INNER JOIN premios_oscar po ON p.Titulo = po.mejor_pelicula
-GROUP BY p.Genero
-ORDER BY premios DESC;   
+-- Paso 1: Obtener todas las películas premiadas y contarlas
+WITH peliculas_premiadas AS (
+    SELECT mejor_pelicula AS titulo
+    FROM proyecto_peliculas.premios_oscar
+    UNION ALL
+    SELECT mejor_director AS titulo
+    FROM proyecto_peliculas.premios_oscar
+    UNION ALL
+    SELECT mejor_actor AS titulo
+    FROM proyecto_peliculas.premios_oscar
+    UNION ALL
+    SELECT mejor_actriz AS titulo
+    FROM proyecto_peliculas.premios_oscar
+),
+
+-- Paso 2: Contar los premios por película
+premios_por_pelicula AS (
+    SELECT 
+        titulo,
+        COUNT(*) AS total_premios
+    FROM 
+        peliculas_premiadas
+    GROUP BY 
+        titulo
+)
+
+-- Paso 3: Seleccionar las películas más premiadas
+SELECT 
+    titulo,
+    total_premios
+FROM 
+    premios_por_pelicula
+ORDER BY 
+    total_premios DESC;
+    
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ -- De las consultas anterior sacamos la tupla con la que saber qué películas han sido premiadas y a qué género pertenecen 
+
+SELECT Titulo, Genero
+FROM proyecto_peliculas.peliculas
+WHERE Titulo IN (
+    'A. Cuarón',
+    'A. Lee',
+    'S. Penn',
+    'D. Day-Lewis',
+    'H. Swank',
+    'E. Stone',
+    'F. McDormand',
+    'Million Dollar Baby',
+    'Crash',
+    'The Departed',
+    'No Country for Old Men',
+    'Slumdog Millionaire',
+    'The Hurt Locker',
+    'The King''s Speech',
+    'The Artist',
+    'Argo',
+    '12 Years a Slave',
+    'Birdman or',
+    'Spotlight',
+    'Moonlight',
+    'The Shape of Water',
+    'Green Book',
+    'Parasite',
+    'Nomadland',
+    'CODA',
+    'Everything Everywhere All at Once',
+    'Oppenheimer',
+    'S. Mendes',
+    'S. Soderbergh',
+    'R. Howard',
+    'R. Polanski',
+    'P. Jackson',
+    'C. Eastwood',
+    'M. Scorsese',
+    'J. Coen E. Coen',
+    'D. Boyle',
+    'K. Bigelow',
+    'T. Hooper',
+    'M. Hazanavicius',
+    'A. G. Iñárritu',
+    'D. Chazelle',
+    'G. del Toro',
+    'Bong J.',
+    'C. Zhao',
+    'J. Campion',
+    'D. Kwan D. Scheinert',
+    'C. Nolan',
+    'K. Spacey',
+    'R. Crowe',
+    'D. Washington',
+    'A. Brody',
+    'American Beauty',
+    'J. Foxx',
+    'P. S. Hoffman',
+    'F. Whitaker',
+    'Gladiator',
+    'J. Bridges',
+    'C. Firth',
+    'J. Dujardin',
+    'M. McConaughey',
+    'E. Redmayne',
+    'L. DiCaprio',
+    'C. Affleck',
+    'G. Oldman',
+    'R. Malek',
+    'J. Phoenix',
+    'A. Hopkins',
+    'W. Smith',
+    'B. Fraser',
+    'C. Murphy',
+    'A Beautiful Mind',
+    'J. Roberts',
+    'H. Berry',
+    'N. Kidman',
+    'C. Theron',
+    'R. Witherspoon',
+    'H. Mirren',
+    'M. Cotillard',
+    'K. Winslet',
+    'S. Bullock',
+    'N. Portman',
+    'M. Streep',
+    'J. Lawrence',
+    'C. Blanchett',
+    'J. Moore',
+    'B. Larson',
+    'Chicago',
+    'The Lord of the Rings: The Return of the King',
+    'O. Colman',
+    'R. Zellweger',
+    'J. Chastain',
+    'M. Yeoh'
+);
+ 
 
 -- otra prueba 
 SELECT g.nombre_genero, COUNT(*) AS total_premios
