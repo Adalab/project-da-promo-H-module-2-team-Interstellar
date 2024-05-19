@@ -1,99 +1,15 @@
-## Fase 5: Creación de una Base de Datos
-
-Para la Fase 5 del Proyecto CinemExtract, donde se necesita crear una base de datos SQL, la estructura debe ser capaz de almacenar y relacionar toda la información recopilada en las fases anteriores. Aquí te presento una posible estructura de la base de datos con las tablas y las relaciones necesarias:
-
-### 1. Estructura de la Base de Datos
-
-#### Tabla `Peliculas`
-Almacena la información básica de cada película o corto.
-- `ID_Peliculas`: (PK): Identificador único de la película.
-- `ID_IMDB` (VARCHAR): Identificador de las película en IMDB.
-- `Tipo` (VARCHAR): Tipo (película o corto).
-- `Titulo` (VARCHAR PK): Nombre de la película o corto.
-- `Mes_estreno` (INT): Mes de estreno.
-- `Año_estreno` (INT): Mes de estreno.
-
-
-#### Tabla `Generos`
-Almacena los géneros de las películas.
-- `ID_Genero` (PK): Identificador único del género.
-- `Titulo` (FK): Identificador único de la película.
-- `Genero` (VARCHAR): Nombre del género.
-
-
-#### Tabla `IMDB`
-Almacena detalles adicionales de cada película.
-- `ID_IMDB` (PK FK): Referencia a la tabla `Peliculas`.
-- `Puntuacion_IMDB` (FLOAT): Puntuación en IMDB.
-- `Director` (VARCHAR): Director de la película.
-- `Guionistas` (VARCHAR): Guionistas de la película.
-- `Argumento` (TEXT): Resumen de la película.
-- `Duracion` (VARCHAR): Duración en minutos.
-
-### Tabla `Rotten_Tomatoes"
-Almacena las puntuaciones de las películas.
-- `ID_Tomato` (PK): Identificador único del género.
-- `Titulo' (FK): Identificador único de la película.
-- `ID_Peliculas`(FK): Identificador único de películas.
-- `Tomatometro`: Puntuación en Rotten Tomatoes.
-
-#### Tabla `Actores`
-Almacena información de los actores.
-- `ID_Actor` (PK): Identificador único del actor.
-- `Nombre` (VARCHAR): Nombre del actor.
-- `Año_nacimiento` (INT): Año de nacimiento.
-- `Conocido_por` (TEXT): Películas o series conocidas.
-- `Ocupacion` (TEXT): Ocupaciones del actor.
-- `Premios` (TEXT): Premios recibidos.
-
-#### Tabla `Peliculas_Actores`
-Relación muchos a muchos entre películas y actores.
-- `ID_Peliculas` (FK): Referencia a la tabla `Peliculas`.
-- `ID_Actor` (FK): Referencia a la tabla `Actores`.
-
-#### Tabla `Premios_Oscar`
-Almacena información de los premios Oscar.
-- `Año` (INT, PK): Año de la ceremonia.
-- `Fecha_ceremonia` (DATE): Fecha de la ceremonia.
-- `Mejor_pelicula` (VARCHAR): Mejor película.
-- `Mejor_director` (VARCHAR): Mejor director.
-- `Mejor_actor` (VARCHAR): Mejor actor.
-- `Mejor_actriz` (VARCHAR): Mejor actriz.
-
-### 2. Inserción de Datos desde CSV
-
-Para insertar los datos desde CSV a las tablas de la base de datos, primero debes asegurarte de que los CSV tengan el formato adecuado correspondiente a la estructura de las tablas. Aquí hay un ejemplo de cómo cargar datos desde CSV usando SQL:
-
-Aquí tienes la corrección de la creación de tablas y los comandos de carga de datos desde CSV:
-
-### 1. Estructura de la Base de Datos
+### 1. Primera estructura de la Base de Datos (Que coincide con los CSVs)
 
 #### Tabla `Peliculas`
 ```sql
 CREATE TABLE Peliculas (
-    ID_IMDB VARCHAR(255) PRIMARY KEY,
     Tipo VARCHAR(50),
-    Titulo VARCHAR(255) PRIMARY KEY,
-    Mes_estreno INT,
-    Año_estreno INT
-);
-```
-
-#### Tabla `Generos`
-```sql
-CREATE TABLE Generos (
-    ID_Genero SERIAL PRIMARY KEY,
-    Genero VARCHAR(50)
-);
-```
-
-#### Tabla `Peliculas_Generos`
-```sql
-CREATE TABLE Peliculas_Generos (
-    ID_IMDB VARCHAR(255),
-    ID_Genero INT,
-    FOREIGN KEY (ID_IMDB) REFERENCES Peliculas(ID_IMDB),
-    FOREIGN KEY (ID_Genero) REFERENCES Generos(ID_Genero)
+    Genero VARCHAR(50),
+    Titulo VARCHAR(255),
+    Mes INT,
+    Anio INT,
+    ID_IMDB VARCHAR(255)
+    PRIMARY KEY (Titulo, ID_IMDB)
 );
 ```
 
