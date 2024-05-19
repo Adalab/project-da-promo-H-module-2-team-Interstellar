@@ -1,195 +1,151 @@
-### 1. Primera estructura de la Base de Datos (Que coincide con los CSVs)
+# Consultas SQL para Base de Datos de Películas
 
-#### Tabla `Peliculas`
+Este repositorio contiene las consultas SQL necesarias para obtener información de una base de datos de películas, incluyendo detalles sobre géneros, valoraciones y premios Óscar. Las tablas ya están creadas en la base de datos según las estructuras proporcionadas.
+
+## Tablas
+
+### Tabla `generos`
+| Column        | Type               |
+|---------------|--------------------|
+| genero_id     | SMALLINT AI PK     |
+| nombre_genero | VARCHAR(30)        |
+
+### Tabla `peliculas_generos`
+| Column     | Type           |
+|------------|----------------|
+| pelicula_id| INT            |
+| genero_id  | SMALLINT       |
+
+### Tabla `detalles_peliculas`
+| Column            | Type          |
+|-------------------|---------------|
+| ID_IMDB           | VARCHAR(50) PK|
+| Nombre            | VARCHAR(100)  |
+| Director          | VARCHAR(255)  |
+| Guionista         | VARCHAR(250)  |
+| Argumento         | TEXT          |
+| Duracion          | VARCHAR(30)   |
+| Puntuacion_IMDb   | VARCHAR(30)   |
+| Puntuacion_Rotten | VARCHAR(30)   |
+
+### Tabla `peliculas`
+| Column     | Type           |
+|------------|----------------|
+| Tipo       | VARCHAR(30)    |
+| Genero     | VARCHAR(30)    |
+| Titulo     | VARCHAR(255)   |
+| Mes        | SMALLINT       |
+| Anio       | INT            |
+| ID_IMDB    | VARCHAR(255)   |
+| pelicula_id| INT AI PK      |
+
+### Tabla `premios_oscar`
+| Column          | Type           |
+|-----------------|----------------|
+| oscar_id        | SMALLINT AI PK |
+| fecha_ceremonia | YEAR           |
+| mejor_pelicula  | VARCHAR(100)   |
+| mejor_director  | VARCHAR(50)    |
+| mejor_actor     | VARCHAR(50)    |
+| mejor_actriz    | VARCHAR(50)    |
+
+## Consultas SQL
+
+### ¿Qué géneros han recibido más premios Óscar?
+
 ```sql
-CREATE TABLE Peliculas (
-    Tipo VARCHAR(50),
-    Genero VARCHAR(50),
-    Titulo VARCHAR(255),
-    Mes INT,
-    Anio INT,
-    ID_IMDB VARCHAR(255)
-    PRIMARY KEY (Titulo, ID_IMDB)
-);
+SELECT g.nombre_genero, COUNT(*) AS total_premios
+FROM premios_oscar po
+JOIN peliculas p ON po.mejor_pelicula = p.Titulo
+JOIN peliculas_generos pg ON p.pelicula_id = pg.pelicula_id
+JOIN generos g ON pg.genero_id = g.genero_id
+GROUP BY g.nombre_genero
+ORDER BY total_premios DESC;
 ```
 
-#### Tabla `IMDB`
+### ¿Qué género es el mejor valorado en IMDB?
+
 ```sql
-CREATE TABLE IMDB (
-    ID_rating_IMDB SERIAL PRIMARY KEY,
-    Puntuacion_IMDB FLOAT,
-    Director VARCHAR(255),
-    Guionistas TEXT,
-    Argumento TEXT,
-    Duracion VARCHAR(50),
-);
+SELECT g.nombre_genero, AVG(CAST(dp.Puntuacion_IMDb AS DECIMAL(3, 1))) AS promedio_puntuacion
+FROM detalles_peliculas dp
+JOIN peliculas p ON dp.ID_IMDB = p.ID_IMDB
+JOIN peliculas_generos pg ON p.pelicula_id = pg.pelicula_id
+JOIN generos g ON pg.genero_id = g.genero_id
+GROUP BY g.nombre_genero
+ORDER BY promedio_puntuacion DESC
+LIMIT 1;
 ```
 
-#### Tabla `Rotten_Tomatoes`
+### ¿En qué año se estrenaron más películas?
+
 ```sql
-CREATE TABLE Rotten_Tomatoes (
-    ID_Tomato SERIAL PRIMARY KEY,
-    Titulo VARCHAR(255)
-    Tomatometro FLOAT
-    FOREIGN KEY (Titulo) REFERENCES Peliculas(Titulo)
-);
+SELECT Anio, COUNT(*) AS total_peliculas
+FROM peliculas
+WHERE Tipo = 'Película'
+GROUP BY Anio
+ORDER BY total_peliculas DESC
+LIMIT 1;
 ```
 
-
-#### Tabla `Actores`
-```sql
-CREATE TABLE Actores (
-    Nombre VARCHAR(255) PRIMARY KEY,
-    Año_nacimiento INT,
-    Conocido_por TEXT,
-    Ocupacion TEXT,
-    Premios TEXT
-);
-```
-
-#### Tabla `Peliculas_Actores`
-```sql
-CREATE TABLE Peliculas_Actores (
-    Titulo VARCHAR(255),
-    ID_Actor INT,
-    FOREIGN KEY (Titulo) REFERENCES Peliculas(Titulo),
-    FOREIGN KEY (Nombre) REFERENCES Actores(Nombre)
-);
-```
-
-#### Tabla `Premios_Oscar`
-```sql
-CREATE TABLE Premios_Oscar (
-    Año INT PRIMARY KEY,
-    Fecha_ceremonia DATE,
-    Mejor_pelicula VARCHAR(255),
-    Mejor_director VARCHAR(255),
-    Mejor_actor VARCHAR(255),
-    Mejor_actriz VARCHAR(255)
-);
-```
-
-### 2. Inserción de Datos desde CSV
-
-Asegúrate de que los archivos CSV tengan el formato adecuado y que las columnas coincidan con las definidas en las tablas. Aquí están los comandos SQL corregidos para cargar datos desde CSV:
+### ¿En qué año se estrenaron más cortos?
 
 ```sql
--- Cargar datos desde CSV
-
-COPY Peliculas(ID_IMDB, Titulo, Tipo, Mes_estreno, Año_estreno)
-FROM '/path/to/peliculas.csv'
-DELIMITER ','
-CSV HEADER;
-
-COPY Generos(ID_Genero, Genero)
-FROM '/path/to/generos.csv'
-DELIMITER ','
-CSV HEADER;
-
-
-COPY Detalles_Peliculas(ID_IMDB, Puntuacion_IMDB, Puntuacion_Tomate, Director, Guionistas, Argumento, Duracion)
-FROM '/path/to/detalles_peliculas.csv'
-DELIMITER ','
-CSV HEADER;
-
-COPY Actores(ID_Actor, Nombre, Año_nacimiento, Conocido_por, Ocupacion, Premios)
-FROM '/path/to/actores.csv'
-DELIMITER ','
-CSV HEADER;
-
-
-COPY Premios_Oscar(Año, Fecha_ceremonia, Mejor_pelicula, Mejor_director, Mejor_actor, Mejor_actriz)
-FROM '/path/to/premios_oscar.csv'
-DELIMITER ','
-CSV HEADER;
-```
-
-### 3. Realización de Consultas para Obtener Información (Fase 7)
-
-#### Consultas Ejemplares
-
-1. **¿Qué géneros han recibido más premios Óscar?**
-
-```sql
-SELECT g.Genero, COUNT(*) as premios
-FROM Peliculas p
-INNER JOIN Peliculas_Generos pg ON p.ID_IMDB = pg.ID_IMDB
-INNER JOIN Generos g ON pg.ID_Genero = g.ID_Genero
-INNER JOIN Premios_Oscar po ON p.Titulo = po.Mejor_pelicula
-GROUP BY g.Genero
-ORDER BY premios DESC;
-```
-
-2. **¿Qué género es el mejor valorado en IMDB?**
-
-```sql
-SELECT g.Genero, AVG(dp.Puntuacion_IMDB) as promedio_imdb
-FROM Peliculas p
-INNER JOIN Peliculas_Generos pg ON p.ID_IMDB = pg.ID_IMDB
-INNER JOIN Generos g ON pg.ID_Genero = g.ID_Genero
-INNER JOIN Detalles_Peliculas dp ON p.ID_IMDB = dp.ID_IMDB
-GROUP BY g.Genero
-ORDER BY promedio_imdb DESC;
-```
-
-3. **¿En qué año se estrenaron más películas?**
-
-```sql
-SELECT Año_estreno, COUNT(*) as cantidad
-FROM Peliculas
-WHERE Tipo = 'Pelicula'
-GROUP BY Año_estreno
-ORDER BY cantidad DESC;
-```
-
-4. **¿En qué año se estrenaron más cortos?**
-
-```sql
-SELECT Año_estreno, COUNT(*) as cantidad
-FROM Peliculas
+SELECT Anio, COUNT(*) AS total_cortos
+FROM peliculas
 WHERE Tipo = 'Corto'
-GROUP BY Año_estreno
-ORDER BY cantidad DESC;
+GROUP BY Anio
+ORDER BY total_cortos DESC
+LIMIT 1;
 ```
 
-5. **¿Cuál es la mejor serie valorada en IMDB?**
+### ¿Cuál es la mejor serie valorada en IMDB?
 
 ```sql
-SELECT p.Titulo, dp.Puntuacion_IMDB
-FROM Detalles_Peliculas dp
-INNER JOIN Peliculas p ON dp.ID_IMDB = p.ID_IMDB
+SELECT p.Titulo, dp.Puntuacion_IMDb
+FROM detalles_peliculas dp
+JOIN peliculas p ON dp.ID_IMDB = p.ID_IMDB
 WHERE p.Tipo = 'Serie'
-ORDER BY dp.Puntuacion_IMDB DESC
+ORDER BY CAST(dp.Puntuacion_IMDb AS DECIMAL(3, 1)) DESC
 LIMIT 1;
 ```
 
-6. **¿Cuál es la película mejor valorada en IMDB?**
+### ¿Cuál es la película mejor valorada en IMDB?
 
 ```sql
-SELECT p.Titulo, dp.Puntuacion_IMDB
-FROM Detalles_Peliculas dp
-INNER JOIN Peliculas p ON dp.ID_IMDB = p.ID_IMDB
-WHERE p.Tipo = 'Pelicula'
-ORDER BY dp.Puntuacion_IMDB DESC
+SELECT p.Titulo, dp.Puntuacion_IMDb
+FROM detalles_peliculas dp
+JOIN peliculas p ON dp.ID_IMDB = p.ID_IMDB
+WHERE p.Tipo = 'Película'
+ORDER BY CAST(dp.Puntuacion_IMDb AS DECIMAL(3, 1)) DESC
 LIMIT 1;
 ```
 
-7. **¿Qué actor/actriz ha recibido más premios?**
+### ¿Qué actor/actriz ha recibido más premios?
 
 ```sql
-SELECT Nombre, COUNT(*) as cantidad_premios
-FROM Actores
-GROUP BY Nombre
-ORDER BY cantidad_premios DESC;
+SELECT ganador, COUNT(*) AS total_premios
+FROM (
+    SELECT mejor_actor AS ganador FROM premios_oscar
+    UNION ALL
+    SELECT mejor_actriz AS ganador FROM premios_oscar
+) AS premios
+GROUP BY ganador
+ORDER BY total_premios DESC
+LIMIT 1;
 ```
 
-8. **¿Hay algún actor/actriz que haya recibido más de un premio Óscar?**
+### ¿Hay algún actor/actriz que haya recibido más de un premio Óscar?
 
 ```sql
-SELECT Nombre, COUNT(*) as cantidad_premios
-FROM Actores
-WHERE Premios LIKE '%Oscar%'
-GROUP BY Nombre
-HAVING COUNT(*) > 1;
+SELECT ganador, COUNT(*) AS total_premios
+FROM (
+    SELECT mejor_actor AS ganador FROM premios_oscar
+    UNION ALL
+    SELECT mejor_actriz AS ganador FROM premios_oscar
+) AS premios
+GROUP BY ganador
+HAVING total_premios > 1;
 ```
+
+
 
