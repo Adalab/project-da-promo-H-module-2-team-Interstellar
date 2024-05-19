@@ -6,153 +6,182 @@ Para la Fase 5 del Proyecto CinemExtract, donde se necesita crear una base de da
 
 #### Tabla `Peliculas`
 Almacena la información básica de cada película o corto.
-- `id` (PK): Identificador único de la película.
-- `nombre` (VARCHAR): Nombre de la película o corto.
-- `año_estreno` (INT): Año de estreno.
-- `mes_estreno` (INT): Mes de estreno.
-- `tipo` (VARCHAR): Tipo (película o corto).
+- `ID_Peliculas`: (PK): Identificador único de la película.
+- `ID_IMDB` (VARCHAR): Identificador de las película en IMDB.
+- `Tipo` (VARCHAR): Tipo (película o corto).
+- `Titulo` (VARCHAR): Nombre de la película o corto.
+- `Mes_estreno` (INT): Mes de estreno.
+- `Año_estreno` (INT): Mes de estreno.
+
 
 #### Tabla `Generos`
 Almacena los géneros de las películas.
-- `id` (PK): Identificador único del género.
-- `nombre` (VARCHAR): Nombre del género.
+- `ID_Genero` (PK): Identificador único del género.
+- `ID_Peliculas` (FK): Identificador único de la película.
+- `Genero` (VARCHAR): Nombre del género.
 
-#### Tabla `Peliculas_Generos`
-Relación muchos a muchos entre películas y géneros.
-- `pelicula_id` (FK): Referencia a la tabla `Peliculas`.
-- `genero_id` (FK): Referencia a la tabla `Generos`.
 
-#### Tabla `Detalles_Peliculas`
+#### Tabla `IMDB`
 Almacena detalles adicionales de cada película.
-- `pelicula_id` (PK, FK): Referencia a la tabla `Peliculas`.
-- `puntuacion_imdb` (FLOAT): Puntuación en IMDB.
-- `puntuacion_rt` (FLOAT): Puntuación en Rotten Tomatoes.
-- `director` (VARCHAR): Director de la película.
-- `guionistas` (VARCHAR): Guionistas de la película.
-- `argumento` (TEXT): Resumen de la película.
-- `duracion` (VARCHAR): Duración en minutos.
+- `ID_Peliculas` (PK FK): Referencia a la tabla `Peliculas`.
+- `Puntuacion_IMDB` (FLOAT): Puntuación en IMDB.
+- `Director` (VARCHAR): Director de la película.
+- `Guionistas` (VARCHAR): Guionistas de la película.
+- `Argumento` (TEXT): Resumen de la película.
+- `Duracion` (VARCHAR): Duración en minutos.
+
+### Tabla `Rotten_Tomatoes"
+Almacena las puntuaciones de las películas.
+- `ID_Tomato` (PK): Identificador único del género.
+- `ID_Peliculas`(FK): Identificador único de películas.
+- `Tomatometro`: Puntuación en Rotten Tomatoes.
 
 #### Tabla `Actores`
 Almacena información de los actores.
-- `id` (PK): Identificador único del actor.
-- `nombre` (VARCHAR): Nombre del actor.
-- `año_nacimiento` (INT): Año de nacimiento.
-- `conocido_por` (TEXT): Películas o series conocidas.
-- `ocupaciones` (TEXT): Ocupaciones del actor.
-- `premios` (TEXT): Premios recibidos.
+- `ID_Actor` (PK): Identificador único del actor.
+- `Nombre` (VARCHAR): Nombre del actor.
+- `Año_nacimiento` (INT): Año de nacimiento.
+- `Conocido_por` (TEXT): Películas o series conocidas.
+- `Ocupacion` (TEXT): Ocupaciones del actor.
+- `Premios` (TEXT): Premios recibidos.
 
 #### Tabla `Peliculas_Actores`
 Relación muchos a muchos entre películas y actores.
-- `pelicula_id` (FK): Referencia a la tabla `Peliculas`.
-- `actor_id` (FK): Referencia a la tabla `Actores`.
+- `ID_Peliculas` (FK): Referencia a la tabla `Peliculas`.
+- `ID_Actor` (FK): Referencia a la tabla `Actores`.
 
 #### Tabla `Premios_Oscar`
 Almacena información de los premios Oscar.
-- `año` (INT, PK): Año de la ceremonia.
-- `fecha_ceremonia` (DATE): Fecha de la ceremonia.
-- `mejor_pelicula` (VARCHAR): Mejor película.
-- `mejor_director` (VARCHAR): Mejor director.
-- `mejor_actor` (VARCHAR): Mejor actor.
-- `mejor_actriz` (VARCHAR): Mejor actriz.
+- `Año` (INT, PK): Año de la ceremonia.
+- `Fecha_ceremonia` (DATE): Fecha de la ceremonia.
+- `Mejor_pelicula` (VARCHAR): Mejor película.
+- `Mejor_director` (VARCHAR): Mejor director.
+- `Mejor_actor` (VARCHAR): Mejor actor.
+- `Mejor_actriz` (VARCHAR): Mejor actriz.
 
 ### 2. Inserción de Datos desde CSV
 
 Para insertar los datos desde CSV a las tablas de la base de datos, primero debes asegurarte de que los CSV tengan el formato adecuado correspondiente a la estructura de las tablas. Aquí hay un ejemplo de cómo cargar datos desde CSV usando SQL:
 
-#### Ejemplo de Código SQL para Cargar Datos
+Aquí tienes la corrección de la creación de tablas y los comandos de carga de datos desde CSV:
+
+### 1. Estructura de la Base de Datos
+
+#### Tabla `Peliculas`
+```sql
+CREATE TABLE Peliculas (
+    ID_IMDB VARCHAR(255) PRIMARY KEY,
+    Tipo VARCHAR(50),
+    Titulo VARCHAR(255),
+    Mes_estreno INT,
+    Año_estreno INT
+);
+```
+
+#### Tabla `Generos`
+```sql
+CREATE TABLE Generos (
+    ID_Genero SERIAL PRIMARY KEY,
+    Genero VARCHAR(50)
+);
+```
+
+#### Tabla `Peliculas_Generos`
+```sql
+CREATE TABLE Peliculas_Generos (
+    ID_IMDB VARCHAR(255),
+    ID_Genero INT,
+    FOREIGN KEY (ID_IMDB) REFERENCES Peliculas(ID_IMDB),
+    FOREIGN KEY (ID_Genero) REFERENCES Generos(ID_Genero)
+);
+```
+
+#### Tabla `IMDB`
+```sql
+CREATE TABLE IMDB (
+    ID_IMDB VARCHAR(255) PRIMARY KEY,
+    Puntuacion_IMDB FLOAT,
+    Director VARCHAR(255),
+    Guionistas TEXT,
+    Argumento TEXT,
+    Duracion VARCHAR(50),
+    FOREIGN KEY (ID_IMDB) REFERENCES Peliculas(ID_IMDB)
+);
+```
+
+#### Tabla `Rotten_Tomatoes`
+```sql
+CREATE TABLE Rotten_Tomatoes (
+    ID_Tomato SERIAL PRIMARY KEY,
+    Tomatometro FLOAT
+);
+```
+
+
+#### Tabla `Actores`
+```sql
+CREATE TABLE Actores (
+    ID_Actor SERIAL PRIMARY KEY,
+    Nombre VARCHAR(255),
+    Año_nacimiento INT,
+    Conocido_por TEXT,
+    Ocupacion TEXT,
+    Premios TEXT
+);
+```
+
+#### Tabla `Peliculas_Actores`
+```sql
+CREATE TABLE Peliculas_Actores (
+    ID_IMDB VARCHAR(255),
+    ID_Actor INT,
+    FOREIGN KEY (ID_IMDB) REFERENCES Peliculas(ID_IMDB),
+    FOREIGN KEY (ID_Actor) REFERENCES Actores(ID_Actor)
+);
+```
+
+#### Tabla `Premios_Oscar`
+```sql
+CREATE TABLE Premios_Oscar (
+    Año INT PRIMARY KEY,
+    Fecha_ceremonia DATE,
+    Mejor_pelicula VARCHAR(255),
+    Mejor_director VARCHAR(255),
+    Mejor_actor VARCHAR(255),
+    Mejor_actriz VARCHAR(255)
+);
+```
+
+### 2. Inserción de Datos desde CSV
+
+Asegúrate de que los archivos CSV tengan el formato adecuado y que las columnas coincidan con las definidas en las tablas. Aquí están los comandos SQL corregidos para cargar datos desde CSV:
 
 ```sql
--- Crear las tablas
-
-CREATE TABLE Peliculas (
-    id VARCHAR(255) PRIMARY KEY,
-    nombre VARCHAR(255),
-    año_estreno INT,
-    mes_estreno INT,
-    tipo VARCHAR(50)
-);
-
-CREATE TABLE Generos (
-    id SERIAL PRIMARY KEY,
-    nombre VARCHAR(50)
-);
-
-CREATE TABLE Peliculas_Generos (
-    pelicula_id VARCHAR(255),
-    genero_id INT,
-    FOREIGN KEY (pelicula_id) REFERENCES Peliculas(id),
-    FOREIGN KEY (genero_id) REFERENCES Generos(id)
-);
-
-CREATE TABLE Detalles_Peliculas (
-    pelicula_id VARCHAR(255) PRIMARY KEY,
-    puntuacion_imdb FLOAT,
-    puntuacion_rt FLOAT,
-    director VARCHAR(255),
-    guionistas TEXT,
-    argumento TEXT,
-    duracion VARCHAR(50),
-    FOREIGN KEY (pelicula_id) REFERENCES Peliculas(id)
-);
-
-CREATE TABLE Actores (
-    id SERIAL PRIMARY KEY,
-    nombre VARCHAR(255),
-    año_nacimiento INT,
-    conocido_por TEXT,
-    ocupaciones TEXT,
-    premios TEXT
-);
-
-CREATE TABLE Peliculas_Actores (
-    pelicula_id VARCHAR(255),
-    actor_id INT,
-    FOREIGN KEY (pelicula_id) REFERENCES Peliculas(id),
-    FOREIGN KEY (actor_id) REFERENCES Actores(id)
-);
-
-CREATE TABLE Premios_Oscar (
-    año INT PRIMARY KEY,
-    fecha_ceremonia DATE,
-    mejor_pelicula VARCHAR(255),
-    mejor_director VARCHAR(255),
-    mejor_actor VARCHAR(255),
-    mejor_actriz VARCHAR(255)
-);
-
 -- Cargar datos desde CSV
 
-COPY Peliculas(id, nombre, año_estreno, mes_estreno, tipo)
+COPY Peliculas(ID_IMDB, Titulo, Tipo, Mes_estreno, Año_estreno)
 FROM '/path/to/peliculas.csv'
 DELIMITER ','
 CSV HEADER;
 
-COPY Generos(id, nombre)
+COPY Generos(ID_Genero, Genero)
 FROM '/path/to/generos.csv'
 DELIMITER ','
 CSV HEADER;
 
-COPY Peliculas_Generos(pelicula_id, genero_id)
-FROM '/path/to/peliculas_generos.csv'
-DELIMITER ','
-CSV HEADER;
 
-COPY Detalles_Peliculas(pelicula_id, puntuacion_imdb, puntuacion_rt, director, guionistas, argumento, duracion)
+COPY Detalles_Peliculas(ID_IMDB, Puntuacion_IMDB, Puntuacion_Tomate, Director, Guionistas, Argumento, Duracion)
 FROM '/path/to/detalles_peliculas.csv'
 DELIMITER ','
 CSV HEADER;
 
-COPY Actores(id, nombre, año_nacimiento, conocido_por, ocupaciones, premios)
+COPY Actores(ID_Actor, Nombre, Año_nacimiento, Conocido_por, Ocupacion, Premios)
 FROM '/path/to/actores.csv'
 DELIMITER ','
 CSV HEADER;
 
-COPY Peliculas_Actores(pelicula_id, actor_id)
-FROM '/path/to/peliculas_actores.csv'
-DELIMITER ','
-CSV HEADER;
 
-COPY Premios_Oscar(año, fecha_ceremonia, mejor_pelicula, mejor_director, mejor_actor, mejor_actriz)
+COPY Premios_Oscar(Año, Fecha_ceremonia, Mejor_pelicula, Mejor_director, Mejor_actor, Mejor_actriz)
 FROM '/path/to/premios_oscar.csv'
 DELIMITER ','
 CSV HEADER;
@@ -160,93 +189,90 @@ CSV HEADER;
 
 ### 3. Realización de Consultas para Obtener Información (Fase 7)
 
-Con los datos almacenados en la base de datos, puedes realizar consultas SQL para responder a las preguntas de la Fase 7. Aquí tienes algunos ejemplos:
-
 #### Consultas Ejemplares
 
 1. **¿Qué géneros han recibido más premios Óscar?**
 
 ```sql
-SELECT g.nombre, COUNT(*) as premios
+SELECT g.Genero, COUNT(*) as premios
 FROM Peliculas p
-INNER JOIN Peliculas_Generos pg ON p.id = pg.pelicula_id
-INNER JOIN Generos g ON pg.genero_id = g.id
-INNER JOIN Premios_Oscar po ON p.nombre = po.mejor_pelicula
-GROUP BY g.nombre
+INNER JOIN Peliculas_Generos pg ON p.ID_IMDB = pg.ID_IMDB
+INNER JOIN Generos g ON pg.ID_Genero = g.ID_Genero
+INNER JOIN Premios_Oscar po ON p.Titulo = po.Mejor_pelicula
+GROUP BY g.Genero
 ORDER BY premios DESC;
 ```
 
 2. **¿Qué género es el mejor valorado en IMDB?**
 
 ```sql
-SELECT g.nombre, AVG(dp.puntuacion_imdb) as promedio_imdb
+SELECT g.Genero, AVG(dp.Puntuacion_IMDB) as promedio_imdb
 FROM Peliculas p
-INNER JOIN Peliculas_Generos pg ON p.id = pg.pelicula_id
-INNER JOIN Generos g ON pg.genero_id = g.id
-INNER JOIN Detalles_Peliculas dp ON p.id = dp.pelicula_id
-GROUP BY g.nombre
+INNER JOIN Peliculas_Generos pg ON p.ID_IMDB = pg.ID_IMDB
+INNER JOIN Generos g ON pg.ID_Genero = g.ID_Genero
+INNER JOIN Detalles_Peliculas dp ON p.ID_IMDB = dp.ID_IMDB
+GROUP BY g.Genero
 ORDER BY promedio_imdb DESC;
 ```
 
 3. **¿En qué año se estrenaron más películas?**
 
 ```sql
-SELECT año_estreno, COUNT(*) as cantidad
+SELECT Año_estreno, COUNT(*) as cantidad
 FROM Peliculas
-WHERE tipo = 'Pelicula'
-GROUP BY año_estreno
+WHERE Tipo = 'Pelicula'
+GROUP BY Año_estreno
 ORDER BY cantidad DESC;
 ```
 
 4. **¿En qué año se estrenaron más cortos?**
 
 ```sql
-SELECT año_estreno, COUNT(*) as cantidad
+SELECT Año_estreno, COUNT(*) as cantidad
 FROM Peliculas
-WHERE tipo = 'Corto'
-GROUP BY año_estreno
+WHERE Tipo = 'Corto'
+GROUP BY Año_estreno
 ORDER BY cantidad DESC;
 ```
 
 5. **¿Cuál es la mejor serie valorada en IMDB?**
 
 ```sql
-SELECT nombre, puntuacion_imdb
+SELECT p.Titulo, dp.Puntuacion_IMDB
 FROM Detalles_Peliculas dp
-INNER JOIN Peliculas p ON dp.pelicula_id = p.id
-WHERE p.tipo = 'Serie'
-ORDER BY puntuacion_imdb DESC
+INNER JOIN Peliculas p ON dp.ID_IMDB = p.ID_IMDB
+WHERE p.Tipo = 'Serie'
+ORDER BY dp.Puntuacion_IMDB DESC
 LIMIT 1;
 ```
 
 6. **¿Cuál es la película mejor valorada en IMDB?**
 
 ```sql
-SELECT nombre, puntuacion_imdb
+SELECT p.Titulo, dp.Puntuacion_IMDB
 FROM Detalles_Peliculas dp
-INNER JOIN Peliculas p ON dp.pelicula_id = p.id
-WHERE p.tipo = 'Pelicula'
-ORDER BY puntuacion_imdb DESC
+INNER JOIN Peliculas p ON dp.ID_IMDB = p.ID_IMDB
+WHERE p.Tipo = 'Pelicula'
+ORDER BY dp.Puntuacion_IMDB DESC
 LIMIT 1;
 ```
 
 7. **¿Qué actor/actriz ha recibido más premios?**
 
 ```sql
-SELECT nombre, COUNT(*) as cantidad_premios
+SELECT Nombre, COUNT(*) as cantidad_premios
 FROM Actores
-GROUP BY nombre
+GROUP BY Nombre
 ORDER BY cantidad_premios DESC;
 ```
 
 8. **¿Hay algún actor/actriz que haya recibido más de un premio Óscar?**
 
 ```sql
-SELECT nombre, COUNT(*) as cantidad_premios
+SELECT Nombre, COUNT(*) as cantidad_premios
 FROM Actores
-WHERE premios LIKE '%Oscar%'
-GROUP BY nombre
+WHERE Premios LIKE '%Oscar%'
+GROUP BY Nombre
 HAVING COUNT(*) > 1;
 ```
-
 
