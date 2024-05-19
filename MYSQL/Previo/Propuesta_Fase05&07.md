@@ -16,13 +16,12 @@ CREATE TABLE Peliculas (
 #### Tabla `IMDB`
 ```sql
 CREATE TABLE IMDB (
-    ID_IMDB VARCHAR(255) PRIMARY KEY,
+    ID_rating_IMDB SERIAL PRIMARY KEY,
     Puntuacion_IMDB FLOAT,
     Director VARCHAR(255),
     Guionistas TEXT,
     Argumento TEXT,
     Duracion VARCHAR(50),
-    FOREIGN KEY (ID_IMDB) REFERENCES Peliculas(ID_IMDB)
 );
 ```
 
@@ -40,8 +39,7 @@ CREATE TABLE Rotten_Tomatoes (
 #### Tabla `Actores`
 ```sql
 CREATE TABLE Actores (
-    ID_Actor SERIAL PRIMARY KEY,
-    Nombre VARCHAR(255),
+    Nombre VARCHAR(255) PRIMARY KEY,
     Año_nacimiento INT,
     Conocido_por TEXT,
     Ocupacion TEXT,
@@ -52,10 +50,10 @@ CREATE TABLE Actores (
 #### Tabla `Peliculas_Actores`
 ```sql
 CREATE TABLE Peliculas_Actores (
-    ID_IMDB VARCHAR(255),
+    Titulo VARCHAR(255),
     ID_Actor INT,
-    FOREIGN KEY (ID_IMDB) REFERENCES Peliculas(ID_IMDB),
-    FOREIGN KEY (ID_Actor) REFERENCES Actores(ID_Actor)
+    FOREIGN KEY (Titulo) REFERENCES Peliculas(Titulo),
+    FOREIGN KEY (Nombre) REFERENCES Actores(Nombre)
 );
 ```
 
