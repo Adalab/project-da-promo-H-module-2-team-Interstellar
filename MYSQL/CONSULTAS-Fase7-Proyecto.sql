@@ -66,9 +66,12 @@ LIMIT 1;
 
 -- 6. ### ¿Cuál es la película mejor valorada en IMDB?
 
-SELECT Nombre, MAX(round( puntuacion_IMDB))
-FROM detalles_peliculas
+SELECT Nombre, MAX( round( puntuacion_IMDB))
+FROM detalles_peliculas AS DP
+INNER JOIN peliculas AS P
+ON P.ID_IMDB = DP.ID_IMDB
 WHERE puntuacion_IMDB not like 'No encontrado'
+GROUP BY P.TIPO = 'MOVIE' 
 ORDER BY puntuacion_IMDB DESC
 LIMIT 1;
 
