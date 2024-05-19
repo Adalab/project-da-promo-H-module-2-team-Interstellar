@@ -66,11 +66,10 @@ LIMIT 1;
 
 -- 6. ### ¿Cuál es la película mejor valorada en IMDB?
 
-SELECT p.Titulo, dp.Puntuacion_IMDb
-FROM detalles_peliculas dp
-JOIN peliculas p ON dp.ID_IMDB = p.ID_IMDB
-WHERE p.Tipo = 'Película'
-ORDER BY CAST(dp.Puntuacion_IMDb AS DECIMAL(3, 1)) DESC
+SELECT Nombre, MAX(round( puntuacion_IMDB))
+FROM detalles_peliculas
+WHERE puntuacion_IMDB not like 'No encontrado'
+ORDER BY puntuacion_IMDB DESC
 LIMIT 1;
 
 -- 7- ### ¿Qué actor/actriz ha recibido más premios?
