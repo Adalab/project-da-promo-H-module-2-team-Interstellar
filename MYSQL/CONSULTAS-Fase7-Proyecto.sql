@@ -75,15 +75,39 @@ LIMIT 1;
 
 -- 7- ### ¿Qué actor/actriz ha recibido más premios?
 
-SELECT ganador, COUNT(*) AS total_premios
+-- Subconsulta para obtener el número máximo de premios recibidos
+WITH max_premios AS (
+    SELECT 
+        MAX(total_premios) AS max_total_premios
+    FROM (
+        SELECT 
+            nombre_actor, 
+            COUNT(*) AS total_premios
+        FROM (
+            SELECT mejor_actor AS nombre_actor FROM proyecto_peliculas.premios_oscar
+            UNION ALL
+            SELECT mejor_actriz FROM proyecto_peliculas.premios_oscar
+        ) AS actores_premiados
+        GROUP BY nombre_actor
+    ) AS premios_contados
+)
+
+-- Consulta principal para obtener los actores o actrices con el número máximo de premios
+SELECT 
+    nombre_actor, 
+    total_premios
 FROM (
-    SELECT mejor_actor AS ganador FROM premios_oscar
-    UNION ALL
-    SELECT mejor_actriz AS ganador FROM premios_oscar
-) AS premios
-GROUP BY ganador
-ORDER BY total_premios DESC
-LIMIT 1;
+    SELECT 
+        nombre_actor, 
+        COUNT(*) AS total_premios
+    FROM (
+        SELECT mejor_actor AS nombre_actor FROM proyecto_peliculas.premios_oscar
+        UNION ALL
+        SELECT mejor_actriz FROM proyecto_peliculas.premios_oscar
+    ) AS actores_premiados
+    GROUP BY nombre_actor
+) AS premios_contados
+WHERE total_premios = (SELECT max_total_premios FROM max_premios);
 
 
 
