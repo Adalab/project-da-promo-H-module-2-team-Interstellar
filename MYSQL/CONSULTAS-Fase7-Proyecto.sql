@@ -41,7 +41,7 @@ ORDER BY
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  -- De las consultas anterior sacamos la tupla con la que saber qué películas han sido premiadas y a qué género pertenecen 
 
-SELECT Titulo, Genero
+SELECT COUNT(Titulo), Genero
 FROM proyecto_peliculas.peliculas
 WHERE Titulo IN (
     'A. Cuarón',
