@@ -109,84 +109,13 @@ Con los datos almacenados en la base de datos, debes realizar consultas SQL para
 - Mejorar la comunicación entre los miembros del equipo.
 - Mejorar vuestras habilidades de comunicación en público al exponer el proyecto en la sesión final.
 
-## **3. Planificación del Proyecto** 📅
+## **3. Participantes en el proyecto** 📝
+🎞 Paola Jineth Sánchez Solórzano (
+🎞 Gloria González Muñoz (https://www.linkedin.com/in/gloria-gonzalez-105500107/)
+🎞 Silvia Marrero Pazos (https://www.linkedin.com/in/silvia-marrero-pazos-0b95b083/)
+🎞 Margarita María Torres Rodriguez
+🎞 Mábel Martínez Rodríguez (www.linkedin.com/in/mabelmr)
 
-### **3.1. Sprints**
 
-Para la realización de este proyecto trabajaremos en 2 sprints (2 iteraciones). Siguiendo los principios ágiles, estableceremos pequeños ciclos iterativos de forma que al final de cada uno generemos valor perceptible por nuestros usuarios. Dedicaremos el primer día a la planificación del sprint (sprint planning) y el resto a trabajar en el desarrollo del proyecto. Al final de cada sprint haremos un Sprint Review del proyecto para presentar los resultados conseguidos y recoger feedback.
 
-También haremos una retro corta revisando los working agreements que hemos acordado al inicio del proyecto y añadiendo cualquier otro feedback que nos permita mejorar el proyecto.
 
-Al final del segundo sprint (que coincidirá con el final del proyecto y del módulo), haremos una sesión de presentación más completa, más allá de lo que sería un Sprint Review.
-
-### **3.2. Criterios de Aceptación** ✔️
-
-- Crear la infraestructura necesaria: repositorio en GitHub y con acceso para todos los miembros del equipo.
-- Extraer datos de distintas fuentes de datos y creación de una Base de Datos.
-- Tener la extracción de datos, creación de la Base de Datos e inserción de datos automatizada en funciones (obligatorio) y clases (optativo).
-- Tener en el repositorio de GitHub todo el código del desarrollo del proyecto.
-
-### **3.3. Historias de Usuario** 📝
-
-Para la gestión del proyecto, usaremos historias de usuario. Las historias de usuario son descripciones breves y concretas de las funcionalidades o características que un usuario espera encontrar en un producto o sistema. Recordemos que las historias de usuario son una herramienta importante para asegurarse de que el equipo de desarrollo (es decir, nosotras) entienda las necesidades de los usuarios y construya el producto de manera efectiva.
-
-Si bien estas historias de usuario pueden resultar un poco complejas para el tema que nos ocupa, podemos definir unas historias de usuario más claras para este proyecto, estas pueden ser:
-
-- Seleccionar las herramientas con las que vamos a sacar los datos.
-- Decidir la estructura de la base de datos.
-- Inserción de los datos
-
- en la base de datos.
-- Realización de queries para contestar a las preguntas planteadas.
-
-## **4. Entrega** 📤
-
-El formato de entrega de este proyecto será mediante la subida de este a la plataforma de GitHub. Se creará un repositorio. El nombre del repositorio deberá estar compuesto de las siguientes partes, todo ello separado por guiones:
-
-- La palabra: proyecto-da.
-- Letra de la promoción: promo-G.
-- Número del módulo: modulo-2.
-- Número del equipo: team-X.
-
-Por ejemplo:
-
-- project-da-promo-G-modulo-2-team-1
-- project-da-promo-G-modulo-2-team-3
-
-En lo relacionado en las fechas de los sprints:
-
-- Entrega del primer sprint (sprint review): 30 Abril.
-- Entrega del segundo sprint (sprint review): 13 Mayo.
-- Demo del proyecto (presentación final y retro): 20 Mayo.
-
-En las sprint reviews se revisará que se hayan solucionado todas las tareas técnicas asociadas a la entrega de esos sprints, si algo quedara pendiente se arrastraría al siguiente sprint.
-
-## **5. Presentación** 🎤
-
-El último día del módulo presentaréis la versión final de este proyecto a vuestras compañeras y al equipo de Adalab. Cada equipo realizará una presentación de 5 minutos y posteriormente habrá 5 minutos de feedback por parte del público. En este caso, la audiencia podría ser más variada pues no sólo estarán los profesores.
-
-El objetivo es que practiquéis la realización de las demos de los proyectos que habéis desarrollado, explicándolo desde un punto de vista técnico y también desde la perspectiva de producto, mejorando además vuestras habilidades de exposición, objetivo de desarrollo profesional del curso.
-
-Para que la presentación salga bien es imprescindible una buena preparación. Por ello, durante el segundo sprint del módulo tendréis que asignar responsabilidades dentro del equipo relacionadas con la preparación de ésta. Algunos tips para preparar este demo son:
-
-- Todas las participantes del equipo deben hablar en la presentación (sin práctica no hay mejora).
-- Identificar los objetivos de la presentación: Debemos tener claro qué es lo que queremos lograr con la presentación. ¿Queremos demostrar la funcionalidad de un producto? ¿Queremos mostrar los resultados de un experimento? ¿Queremos atraer inversores? Dependiendo del objetivo, deberemos enfocar la presentación de manera distinta.
-- Conocer a tu audiencia: La presentación debe estar adaptada al tipo de audiencia que se espera. Si se presentaráis ante posibles inversores, la presentación debe estar enfocada en los beneficios y la rentabilidad del producto. Si es una presentación para usuarios, deberá enfocarse en la usabilidad y la facilidad de uso.
-- Ser claras y concisas: La presentación debe ser fácil de entender y no debe ser demasiado larga. Es importante presentar la información de manera clara y concisa. Debemos tener en cuenta que los detalles técnicos pueden ser interesantes, pero no deberían opacar la idea principal.
-- Demostrar la funcionalidad del producto: Si la presentación es para demostrar un producto, es importante que demostremos su funcionalidad. Podemos hacerlo mediante un video o demostrando el producto en vivo. Es importante asegurarse de que el producto funciona correctamente antes de la presentación.
-- Resaltar los aspectos más importantes: En cualquier presentación, hay aspectos que son más importantes que otros. Debéis resaltar los aspectos que sean más relevantes para su objetivo. Por ejemplo, si queréis atraer inversores, deberéis resaltar los beneficios y la rentabilidad del producto.
-- Practicar la presentación: Es importante que practiquéis la presentación varias veces antes del evento. Debéis aseguraos de que la presentación esté bien estructurada y que os sintáis cómodas hablando frente a la audiencia.
-- Preparar respuestas a preguntas frecuentes: Es probable que la audiencia tenga preguntas después de la presentación. Debéis preparaos para responder preguntas frecuentes y tener la información necesaria a mano.
-
-Además de esto, para mejorar vuestras habilidades de exposición en público y hacer la presentación más rica, podréis incorporar otros elementos adicionales (son solo ideas, sentíos libres de innovar y ser creativas):
-
-- Dejar muy claro quién ha sido vuestro cliente y qué fue lo que os pidió.
-- Explicar qué necesidades cubre o qué problemas soluciona el producto, cuál es el beneficio principal que aporta y qué lo hace único comparado con otros productos parecidos del mercado.
-- Aportaciones "únicas y diferenciadoras" de cada equipo al proyecto.
-- Cómo ha sido la organización del equipo, el reparto de tareas y la coordinación a la hora de trabajar todas en el mismo código.
-- Cuál de las tareas o los puntos ha sido el que más esfuerzo ha requerido.
-- Cuál de las tareas o partes del producto es la que hace que el equipo esté más orgulloso.
-- Las tecnologías que habéis utilizado y para qué sirven, y algunas partes del código que habéis desarrollado que merezca la pena resaltar.
-- La presentación debe tener un "buen inicio y un buen cierre" que nos haga a todos estar atentos y aplaudir... ahí os dejamos que echéis a volar vuestra imaginación.
-- No habléis en primera persona de lo que habéis hecho, hablad del equipo.
-- No mencionéis problemas, sino "retos" que os han hecho aprender y crecer.
