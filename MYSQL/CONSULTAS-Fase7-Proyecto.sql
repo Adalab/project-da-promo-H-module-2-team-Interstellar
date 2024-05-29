@@ -163,6 +163,7 @@ WHERE Titulo IN (
 
 
 
+ 
 
 
 -- 2. **¿Qué género es el mejor valorado en IMDB?**  
@@ -205,6 +206,14 @@ ORDER BY total_peliculas DESC;
 
 
 
+SELECT Nombre, MAX( round( puntuacion_IMDB))
+FROM detalles_peliculas AS DP
+INNER JOIN peliculas AS P
+ON P.ID_IMDB = DP.ID_IMDB
+WHERE puntuacion_IMDB not like 'No encontrado'
+GROUP BY P.TIPO = 'MOVIE' 
+ORDER BY puntuacion_IMDB DESC
+LIMIT 1;
 
 -- 5. ### ¿Cuál es la película mejor valorada en IMDB?    ----------------------------------
 
@@ -230,6 +239,7 @@ la pelicula mejor valorada con una cantidad de votos significativa (mas de 2 mll
 
 -- Primero calculamos el nº maximo de premios que tienen los actores/actrices de la tabla 
 
+-- Subconsulta para obtener el número máximo de premios recibidos
 WITH max_premios AS (
     SELECT 
         MAX(total_premios) AS max_total_premios
@@ -247,6 +257,7 @@ WITH max_premios AS (
 )
 
 -- Consulta principal ---> obtener los nombre de los actores o actrices con el número máximo de premios
+-- Consulta principal para obtener los actores o actrices con el número máximo de premios
 SELECT 
     nombre_actor, 
     total_premios
