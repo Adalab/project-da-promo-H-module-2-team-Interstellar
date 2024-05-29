@@ -1,7 +1,11 @@
 # **PROYECTO INFINITE PLAY** 🎬
 
-### **Explorando el Séptimo Arte a través de Datos y Tecnología**
-## **Participantes en el proyecto** 📝
+## **URL al vídeo de la presentación:**
+
+https://youtu.be/KxBmlQzjztw
+
+## **Explorando el Séptimo Arte a través de Datos y Tecnología**
+### **Participantes en el proyecto** 📝
 
 🎞 Paola Jineth Sánchez Solórzano
 
