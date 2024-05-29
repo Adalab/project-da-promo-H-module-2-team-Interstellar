@@ -1,4 +1,4 @@
-# **PROYECTO CINEMEXTRACT** 🎬
+# **PROYECTO INFINITE PLAY** 🎬
 
 ### **Explorando el Séptimo Arte a través de Datos y Tecnología**
 ## **Participantes en el proyecto** 📝
