@@ -1,6 +1,17 @@
 # **PROYECTO CINEMEXTRACT** 🎬
 
 ### **Explorando el Séptimo Arte a través de Datos y Tecnología**
+## **Participantes en el proyecto** 📝
+
+🎞 Paola Jineth Sánchez Solórzano
+
+🎞 Gloria González Muñoz (https://www.linkedin.com/in/gloria-gonzalez-105500107/)
+
+🎞 Silvia Marrero Pazos (https://www.linkedin.com/in/silvia-marrero-pazos-0b95b083/)
+
+🎞 Margarita María Torres Rodriguez
+
+🎞 Mábel Martínez Rodríguez (www.linkedin.com/in/mabelmr)
 
 ## **1. Resumen**
 La plataforma de streaming BHO se encuentra en una búsqueda constante para mejorar la calidad de su contenido y la satisfacción de sus usuarios. Nuestro proyecto consiste en aplicar técnicas de análisis de datos para identificar cuáles son las películas y cortometrajes más populares y mejor valorados desde 2010 hasta la fecha. Esto ayudará a BHO a tomar decisiones informadas sobre qué contenido promocionar y destacar en su plataforma.
@@ -108,14 +119,3 @@ Con los datos almacenados en la base de datos, debes realizar consultas SQL para
 - Implementar Scrum como marco de referencia para el desarrollo del producto, basándonos siempre en los valores de Agile como puntos clave del trabajo en equipo y la mejora continua.
 - Mejorar la comunicación entre los miembros del equipo.
 - Mejorar vuestras habilidades de comunicación en público al exponer el proyecto en la sesión final.
-
-## **3. Participantes en el proyecto** 📝
-🎞 Paola Jineth Sánchez Solórzano (
-🎞 Gloria González Muñoz (https://www.linkedin.com/in/gloria-gonzalez-105500107/)
-🎞 Silvia Marrero Pazos (https://www.linkedin.com/in/silvia-marrero-pazos-0b95b083/)
-🎞 Margarita María Torres Rodriguez
-🎞 Mábel Martínez Rodríguez (www.linkedin.com/in/mabelmr)
-
-
-
-
